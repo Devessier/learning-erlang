@@ -16,7 +16,7 @@ client() ->
     ServerPID = server:start("."),
     ServerPID ! {self(), list_dir},
     receive
-        {_, {ok, Files}} ->
+        {ServerPID, {ok, Files}} ->
             io:fwrite("received ~p~n", [Files]),
             read_dir_files(ServerPID, Files)
     end.
